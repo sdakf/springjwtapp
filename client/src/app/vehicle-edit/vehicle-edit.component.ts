@@ -23,7 +23,7 @@ export class VehicleEditComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe(params => {
       let id = params['id'];
-      if (id !== null) {
+      if (id) {
         this.vehicleService.getVehicle(id).subscribe((vehicle: any) => {
           if (vehicle) {
             this.car = vehicle;

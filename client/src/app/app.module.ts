@@ -6,16 +6,30 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { VehiclesListComponent } from './vehicles-list/vehicles-list.component';
 
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule, MatIconModule,
+  MatInputModule,
+  MatListModule, MatMenuModule, MatSidenavModule,
+  MatTabsModule,
+  MatToolbarModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import {httpInterceptorProviders} from "./auth/auth-interceptor";
+import {Sidenav} from "./sidenav/sidenav";
 
 @NgModule({
   declarations: [
     AppComponent,
     VehiclesListComponent,
-    VehicleEditComponent
+    VehicleEditComponent,
+    HomeComponent,
+    LoginComponent,
+    Sidenav
   ],
   imports: [
     BrowserModule,
@@ -27,9 +41,13 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSidenavModule
   ],
-  providers: [],
+  providers: [LoginComponent,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

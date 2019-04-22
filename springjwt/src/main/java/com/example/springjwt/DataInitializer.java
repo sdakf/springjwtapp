@@ -21,8 +21,8 @@ public class DataInitializer extends AppDataInitializer {
         log.info("printing all vehicles...");
         vehicleRepository.findAll().forEach(v -> log.info(" Vehicle :" + v.toString()));
         if (userRepository.count() == 0) {
-            userRepository.saveAndFlush(User.builder().username("apiUser").password(passwordEncoder.encode("apiUserPass")).roles(Lists.newArrayList("USER")).build());
-            userRepository.saveAndFlush(User.builder().username("apiAdmin").password(passwordEncoder.encode("apiAdminPass")).roles(Lists.newArrayList("ADMIN")).build());
+            userRepository.saveAndFlush(User.builder().username("apiUser").password(passwordEncoder.encode("apiUserPass")).roles(Lists.newArrayList("ROLE_USER")).build());
+            userRepository.saveAndFlush(User.builder().username("apiAdmin").password(passwordEncoder.encode("apiAdminPass")).roles(Lists.newArrayList("ROLE_ADMIN")).build());
         }
     }
 }

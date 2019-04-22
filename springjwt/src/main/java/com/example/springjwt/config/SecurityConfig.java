@@ -10,6 +10,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,24 +32,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET","PUT", "POST","DELETE","OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("content-type","authorization"));
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("OPTIONS");
+        configuration.addAllowedMethod("GET");
+        configuration.addAllowedMethod("POST");
+        configuration.addAllowedMethod("PUT");
+        configuration.addAllowedMethod("DELETE");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+//        source.registerCorsConfiguration("/restApi/**", configuration);
+//        source.registerCorsConfiguration("/v1/vehicles", configuration);
+//        source.registerCorsConfiguration("/auth/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //@formatter:off
         http
                 .httpBasic().disable()
                 .csrf().disable()
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/auth/signin").permitAll()
                 .antMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/restapi/**").permitAll()
-//                .antMatchers(HttpMethod.DELETE, "/restapi/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/restapi/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.PUT, "/restapi/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/restApi/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/restApi/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/restApi/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/restApi/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/v1/vehicles/**").permitAll()
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
+
                 .apply(new JwtConfigurer(jwtTokenProvider));
         //@formatter:on
     }
