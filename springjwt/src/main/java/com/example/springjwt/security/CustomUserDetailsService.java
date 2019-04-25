@@ -12,15 +12,15 @@ import java.util.Optional;
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserRepository users;
+    private UserRepository userRepository;
 
-    public CustomUserDetailsService(UserRepository users) {
-        this.users = users;
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> byUsername = this.users.findByUsername(username);
+        Optional<User> byUsername = this.userRepository.findByUsername(username);
         return byUsername
                 .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
     }

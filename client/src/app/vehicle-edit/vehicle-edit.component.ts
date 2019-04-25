@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {VehicleService} from "../common/vehicles/vehicle.service";
 import {GiphyService} from "../common/GiphyService";
 import {NgForm} from '@angular/forms';
+import {Car} from "../model/car";
 
 @Component({
   selector: 'app-vehicle-edit',
@@ -12,7 +13,7 @@ import {NgForm} from '@angular/forms';
 })
 export class VehicleEditComponent implements OnInit {
 
-  car: any = {};
+  car: Car = {id: null, model: null,giphyUrl: null};
   subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -27,8 +28,7 @@ export class VehicleEditComponent implements OnInit {
         this.vehicleService.getVehicle(id).subscribe((vehicle: any) => {
           if (vehicle) {
             this.car = vehicle;
-            this.car.href = vehicle._links.self.href;
-            this.giphyService.populate(vehicle.model).subscribe(url => this.car.giphyUrl = url);
+            // this.giphyService.populate(vehicle.model).subscribe(url => this.car.giphyUrl = url);
           } else {
             console.log(`Car with id '${id}' not found`)
             this.goToList();
@@ -46,7 +46,7 @@ export class VehicleEditComponent implements OnInit {
     this.router.navigate(['/vehicle-list']);
   }
 
-  save(form: NgForm) {
+  save(form: Car) {
     this.vehicleService.save(form).subscribe(result => {
       this.goToList();
     }, error => console.error(error));

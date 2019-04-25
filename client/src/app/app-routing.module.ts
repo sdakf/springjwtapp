@@ -4,6 +4,9 @@ import {VehiclesListComponent} from "./vehicles-list/vehicles-list.component";
 import {VehicleEditComponent} from "./vehicle-edit/vehicle-edit.component";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
+import {AuthGuard} from "./auth/auth-guard.service";
+
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -13,11 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'vehicle-add',
-    component: VehicleEditComponent
+    component: VehicleEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'vehicle-edit/:id',
-    component: VehicleEditComponent
+    component: VehicleEditComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'home',

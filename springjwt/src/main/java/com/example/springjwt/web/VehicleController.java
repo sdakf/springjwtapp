@@ -12,7 +12,6 @@ import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @RequestMapping("/v1/vehicles")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class VehicleController {
 
     private VehicleRepository vehicleRepository;

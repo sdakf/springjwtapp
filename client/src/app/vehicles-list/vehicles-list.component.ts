@@ -18,7 +18,7 @@ export class VehiclesListComponent implements OnInit {
     this.vehiclesService.getVehicles().subscribe(vehicles => {
         this.vehicles = vehicles;
         for (const vehicle of vehicles) {
-          this.giphyService.populate(vehicle.model).subscribe(url => vehicle.giphyUrl = url);
+          // this.giphyService.populate(vehicle.model).subscribe(url => vehicle.giphyUrl = url);
         }
       }
     )

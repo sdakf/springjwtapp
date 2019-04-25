@@ -20,7 +20,6 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/auth")
-//@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     @Autowired
@@ -32,20 +31,30 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/signin")
-    public ResponseEntity signin(@RequestBody AuthenticationRequest data) {
+    @PostMapping("/signIn")
+    public ResponseEntity signIn(@RequestBody AuthenticationRequest data) {
 
         try {
             String username = data.getUsername();
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
             String token = jwtTokenProvider.createToken(username, userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getRoles());
-
-//            Map<Object, Object> model = new HashMap<>();
-//            model.put("username", username);
-//            model.put("token", token);
             return ok(new JwtResponse(token, data.getUsername(), authenticate.getAuthorities()));
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
     }
+
+    @PostMapping("/signUn")
+    public ResponseEntity signUn(@RequestBody AuthenticationRequest data) {
+
+        try {
+            String username = data.getUsername();
+            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
+            String token = jwtTokenProvider.createToken(username, userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getRoles());
+            return ok(new JwtResponse(token, data.getUsername(), authenticate.getAuthorities()));
+        } catch (AuthenticationException e) {
+            throw new BadCredentialsException("Invalid username/password supplied");
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
+import {Constants} from "../../constants";
+import {Car} from "../../model/car";
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +12,25 @@ export class VehicleService {
   constructor(private http: HttpClient) {
   }
 
-  private BASE_URL = '//localhost:8080';
-  private VEHICLE_URL = '//localhost:8080' + '/restApi/vehicles/';
+  // private VEHICLE_URL = '//localhost:8080' + '/restApi/vehicles/';
 
+  private VEHICLES_API = Constants.API_BASE_URL + '/v1/vehicles/';
 
   getVehicles(): Observable<any> {
-    return this.http.get(this.BASE_URL + '/v1/vehicles/')
+    return this.http.get(this.VEHICLES_API)
   }
 
   getVehicle(id: String) {
-    return this.http.get(this.VEHICLE_URL + id);
+    return this.http.get(this.VEHICLES_API + id);
   }
 
 
-  save(car: any): Observable<any> {
+  save(car: Car): Observable<any> {
     let result: Observable<Object>;
     if (car['href']) {
-      result = this.http.put(car.href, car);
+      result = this.http.put(this.VEHICLES_API + car.id, car);
     } else {
-      result = this.http.post(this.VEHICLE_URL, car);
+      result = this.http.post(this.VEHICLES_API, car);
     }
     return result;
   }

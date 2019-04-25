@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {Sidenav} from "./sidenav/sidenav";
+import {AuthGuard} from "./auth/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import {Sidenav} from "./sidenav/sidenav";
     MatIconModule,
     MatSidenavModule
   ],
-  providers: [LoginComponent,httpInterceptorProviders],
+  providers: [LoginComponent,httpInterceptorProviders,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
