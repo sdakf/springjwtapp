@@ -15,9 +15,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (!this.loginService.isLoggedIn) {
-
-    }
     let authReq = req;
     if (req.urlWithParams.indexOf('localhost') > -1) {
       let token = this.tokenStorageService.getToken();

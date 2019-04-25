@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {AuthLoginInfo} from "../auth/login-info";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   private loginInfo: AuthLoginInfo;
 
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) {
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router) {
   }
 
   ngOnInit() {
@@ -45,6 +46,11 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.reloadPage();
+        console.log("Zalogowano")
+        console.log(this.roles)
+        console.log(this.isLoggedIn)
+        console.log("Zalogowano")
+        console.log("Zalogowano")
       },
       error => {
         console.log(error);
@@ -55,7 +61,8 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage() {
-    window.location.reload();
+    // window.location.reload();
+    this.router.navigate(['/login'])
   }
 
   logOut(){
