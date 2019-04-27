@@ -8,6 +8,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Optional;
+
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
@@ -40,7 +42,8 @@ public class VehicleController {
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Long id) {
-        return ok(vehicleRepository.findById(id).orElseThrow(VehicleNotFoundException::new));
+        Optional<Vehicle> byId = vehicleRepository.findById(id);
+        return ok(byId.orElseThrow(VehicleNotFoundException::new));
     }
 
 

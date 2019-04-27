@@ -62,13 +62,15 @@ export class LoginComponent implements OnInit {
 
   reloadPage() {
     // window.location.reload();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   logOut(){
     this.isLoggedIn = false;
     this.roles = []
-    this.tokenStorage.signOut()
+    this.tokenStorage.signOut();
+    this.router.navigate(['/login']);
+
   }
 
 }

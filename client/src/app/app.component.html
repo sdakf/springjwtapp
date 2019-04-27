@@ -5,12 +5,12 @@
   </span>
 
   <span class="toolbar-spacer"></span>
-  <button mat-menu-item color="accent" *ngIf="loginService.isLoggedIn"
-          (click)="loginService.logOut()" [routerLink]="['/home']">Logout
-  </button>
-  <a mat-menu-item style="color: aliceblue;" href="/vehicle-list">Lista</a>
-  <a mat-menu-item style="color: aliceblue;" href="/login">login</a>
+  <button mat-menu-item style="color: aliceblue;" [routerLink]="['/vehicle-list']">Lista</button>
+  <button mat-menu-item style="color: aliceblue;" href="/login" *ngIf="!tokenStorage.isLoggedIn()" [routerLink]="['/login']">login</button>
 
+  <button mat-menu-item color="accent" *ngIf="tokenStorage.isLoggedIn()"
+          (click)="loginService.logOut()" [routerLink]="['/login']">Logout
+  </button>
 </mat-toolbar>
 <!--<app-sidenav></app-sidenav>-->
 

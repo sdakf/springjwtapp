@@ -4,7 +4,7 @@
       <mat-card-title><h2>{{car.model ? 'Edit' : 'Add'}} Car</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <input type="hidden" name="carId" [(ngModel)]="car.id">
+      <input type="hidden" name="id" [(ngModel)]="car.id">
       <mat-form-field>
         <input matInput placeholder="Car Name" [(ngModel)]="car.model"
                required name="model">

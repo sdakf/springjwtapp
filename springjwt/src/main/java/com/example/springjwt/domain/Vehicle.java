@@ -17,4 +17,6 @@ import javax.persistence.Table;
 public class Vehicle extends AbstractAuditableEntity<User, Long> {
     @Column
     private String model;
+
+
 }

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {LoginComponent} from "./login/login.component";
+import {TokenStorageService} from './auth/token-storage.service';
+import {LoginComponent} from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   title = 'client';
 
 
-  constructor(public loginService: LoginComponent) {
+  constructor(public tokenStorage: TokenStorageService, private loginService: LoginComponent) {
 
   }
 }

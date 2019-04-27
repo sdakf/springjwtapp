@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Constants} from "../../constants";
-import {Car} from "../../model/car";
+import {Observable} from 'rxjs';
+import {Constants} from '../../constants';
+import {Car} from '../../model/car';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +17,17 @@ export class VehicleService {
   private VEHICLES_API = Constants.API_BASE_URL + '/v1/vehicles/';
 
   getVehicles(): Observable<any> {
-    return this.http.get(this.VEHICLES_API)
+    return this.http.get(this.VEHICLES_API);
   }
 
-  getVehicle(id: String) {
+  getVehicle(id: string) {
     return this.http.get(this.VEHICLES_API + id);
   }
 
 
   save(car: Car): Observable<any> {
-    let result: Observable<Object>;
-    if (car['href']) {
+    let result: Observable<object>;
+    if (car.id) {
       result = this.http.put(this.VEHICLES_API + car.id, car);
     } else {
       result = this.http.post(this.VEHICLES_API, car);

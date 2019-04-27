@@ -13,7 +13,7 @@ import {Car} from "../model/car";
 })
 export class VehicleEditComponent implements OnInit {
 
-  car: Car = {id: null, model: null,giphyUrl: null};
+  car: Car = {id: null, model: null, giphyUrl: null};
   subscription: Subscription;
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -25,18 +25,19 @@ export class VehicleEditComponent implements OnInit {
     this.subscription = this.route.params.subscribe(params => {
       let id = params['id'];
       if (id) {
-        this.vehicleService.getVehicle(id).subscribe((vehicle: any) => {
+        this.vehicleService.getVehicle(id).subscribe((vehicle: Car) => {
           if (vehicle) {
             this.car = vehicle;
+            console.log(vehicle)
             // this.giphyService.populate(vehicle.model).subscribe(url => this.car.giphyUrl = url);
           } else {
             console.log(`Car with id '${id}' not found`)
             this.goToList();
 
           }
-        })
+        });
       }
-    })
+    });
 
   }
   ngOnDestroy() {
