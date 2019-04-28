@@ -18,5 +18,4 @@ public class Vehicle extends AbstractAuditableEntity<User, Long> {
     @Column
     private String model;
 
-
 }

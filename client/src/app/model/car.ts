@@ -1,5 +1,5 @@
 export class Car {
-  id: number
-  model: string
-  giphyUrl: string
+  id: number;
+  model: string;
+  giphyUrl: string;
 }

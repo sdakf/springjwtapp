@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Constants} from '../../constants';
-import {Car} from '../../model/car';
+import {NgForm} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +25,17 @@ export class VehicleService {
   }
 
 
-  save(car: Car): Observable<any> {
+  save(form: NgForm, id: number): Observable<any> {
     let result: Observable<object>;
-    if (car.id) {
-      result = this.http.put(this.VEHICLES_API + car.id, car);
+    if (id) {
+      result = this.http.put(this.VEHICLES_API + id, form);
     } else {
-      result = this.http.post(this.VEHICLES_API, car);
+      result = this.http.post(this.VEHICLES_API, form);
     }
     return result;
   }
 
-  remove(href: string) {
-    return this.http.delete(href);
+  remove(id: number) {
+    return this.http.delete(this.VEHICLES_API + id);
   }
 }

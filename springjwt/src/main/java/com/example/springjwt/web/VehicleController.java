@@ -34,7 +34,7 @@ public class VehicleController {
         return created(
                 ServletUriComponentsBuilder
                         .fromContextPath(request)
-                        .path("/v1/vehicleRepository/{id}")
+                        .path("/v1/vehicles/{id}")
                         .buildAndExpand(saved.getId())
                         .toUri())
                 .build();
