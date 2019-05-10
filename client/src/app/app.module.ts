@@ -25,6 +25,7 @@ import {LoginComponent} from './login/login.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import {Sidenav} from './sidenav/sidenav';
 import {AuthGuard} from './auth/auth-guard.service';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {AuthGuard} from './auth/auth-guard.service';
     VehicleEditComponent,
     HomeComponent,
     LoginComponent,
-    Sidenav
+    Sidenav,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

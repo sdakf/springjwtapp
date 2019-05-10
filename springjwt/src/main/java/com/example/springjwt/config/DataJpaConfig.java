@@ -23,6 +23,6 @@ public class DataJpaConfig {
                 .map(a -> {
                     return a.getPrincipal();
                 })
-                .map(e -> null);
+                .map(User.class::cast);
     }
 }
