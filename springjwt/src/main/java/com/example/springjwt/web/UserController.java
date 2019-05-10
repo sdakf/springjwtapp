@@ -14,6 +14,6 @@ public class UserController {
 
     @RequestMapping
     public ResponseEntity all(){
-        return userRepository.findAll()
+        return ResponseEntity.ok().body(userRepository.findAll());
     }
 }
