@@ -22,10 +22,10 @@ import {VehicleEditComponent} from './vehicle-edit/vehicle-edit.component';
 import {FormsModule} from '@angular/forms';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
-import {httpInterceptorProviders} from "./auth/auth-interceptor";
+import {httpInterceptorProviders} from './auth/auth-interceptor';
 import {Sidenav} from './sidenav/sidenav';
 import {AuthGuard} from './auth/auth-guard.service';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListComponent} from './user-list/user-list.component';
 
 @NgModule({
   declarations: [

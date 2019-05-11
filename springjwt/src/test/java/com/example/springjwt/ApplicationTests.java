@@ -39,6 +39,7 @@ public class ApplicationTests {
     }
 
     @Test
+    @WithUserDetails("testApiAdmin")
     public void getAllVehicles() throws Exception {
         this.mockMvc
                 .perform(

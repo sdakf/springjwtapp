@@ -37,17 +37,17 @@ public class IntegrationTests {
         RestAssured.port = this.port;
         token = given()
                 .contentType(ContentType.JSON)
-                .body(AuthenticationRequest.builder().username("testApiUser").password("apiUserPass").build())
-                .when().post("/auth/signin")
+                .body(AuthenticationRequest.builder().username("testApiAdmin").password("apiAdminPass").build())
+                .when().post("/auth/signIn")
                 .andReturn().jsonPath().getString("token");
-        log.debug("Got token:" + token);
+        log.info("Got token:" + token);
     }
 
     @Test
     public void getAllVehicles() throws Exception {
         //@formatter:off
         given()
-
+                .header("Authorization", "Bearer "+token)
                 .accept(ContentType.JSON)
 
                 .when()

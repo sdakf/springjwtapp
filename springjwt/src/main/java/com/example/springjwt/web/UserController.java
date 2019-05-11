@@ -13,7 +13,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @RequestMapping
-    public ResponseEntity all(){
+    public ResponseEntity all() {
         return ResponseEntity.ok().body(userRepository.findAll());
     }
 }

@@ -3,9 +3,11 @@ package com.example.springjwt.web;
 import com.example.springjwt.domain.Vehicle;
 import com.example.springjwt.domain.VehicleRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
@@ -24,6 +26,7 @@ public class VehicleController {
 
 
     @GetMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity all() {
         return ok(vehicleRepository.findAll());
     }

@@ -19,8 +19,8 @@ public class TestDataInit extends AppDataInitializer {
         System.out.println("printing all vehicles...");
         vehicleRepository.findAll().forEach(v -> System.out.println(" Vehicle :" + v.toString()));
         if (userRepository.count() == 0) {
-            userRepository.saveAndFlush(User.builder().username("testApiUser").password(passwordEncoder.encode("apiUserPass")).roles(Lists.newArrayList("USER")).build());
-            userRepository.saveAndFlush(User.builder().username("testApiAdmin").password(passwordEncoder.encode("apiAdminPass")).roles(Lists.newArrayList("ADMIN")).build());
+            userRepository.saveAndFlush(User.builder().username("testApiUser").password(passwordEncoder.encode("apiUserPass")).roles(Lists.newArrayList("ROLE_USER")).build());
+            userRepository.saveAndFlush(User.builder().username("testApiAdmin").password(passwordEncoder.encode("apiAdminPass")).roles(Lists.newArrayList("ROLE_ADMIN")).build());
         }
     }
 }
