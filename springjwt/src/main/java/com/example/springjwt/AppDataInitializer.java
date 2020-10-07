@@ -27,7 +27,7 @@ public abstract class AppDataInitializer implements InitializingBean {
         if (initializeDataInDb) {
             initializeDataInDb();
         }else {
-            log.info("Not initializing data...");
+//            log.info("Not initializing data...");
         }
     }
 

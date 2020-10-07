@@ -17,13 +17,13 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(value = {VehicleNotFoundException.class})
     public ResponseEntity vehicleNotFound(VehicleNotFoundException ex, WebRequest request) {
-        log.debug("handling VehicleNotFoundException...");
+//        log.debug("handling VehicleNotFoundException...");
         return notFound().build();
     }
 
     @ExceptionHandler(value = {InvalidJwtAuthenticationException.class})
     public ResponseEntity invalidJwtAuthentication(InvalidJwtAuthenticationException ex, WebRequest request) {
-        log.debug("handling InvalidJwtAuthenticationException...");
+//        log.debug("handling InvalidJwtAuthenticationException...");
         return status(UNAUTHORIZED).build();
     }
 }

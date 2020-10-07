@@ -32,15 +32,17 @@ public class VehicleController {
     }
 
     @PostMapping
+    @RolesAllowed("ADMIN")
     public ResponseEntity save(@RequestBody VehicleForm form, HttpServletRequest request) {
         Vehicle saved = vehicleRepository.save(Vehicle.builder().model(form.getName()).build());
-        return created(
+        ResponseEntity<Object> build = created(
                 ServletUriComponentsBuilder
                         .fromContextPath(request)
                         .path("/v1/vehicles/{id}")
                         .buildAndExpand(saved.getId())
                         .toUri())
                 .build();
+        return build;
     }
 
     @GetMapping("/{id}")
