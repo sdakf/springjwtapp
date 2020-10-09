@@ -10,6 +10,8 @@ public class Vehicle extends AbstractAuditableEntity<User, Long> {
     @Column
     private String model;
 
+
+
     public Vehicle(String model) {
         this.model = model;
     }

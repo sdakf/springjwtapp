@@ -10,8 +10,11 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CarsListComponent } from './cars/cars_list/cars-list.component';
+import {CarsListComponent} from './cars/cars_list/cars-list.component';
 import {HttpClientModule} from '@angular/common/http';
+import {httpInterceptorProviders} from './auth/auth-interceptor';
+import {AuthGuard} from './auth/auth-guard.service';
+import {CarsEditComponent} from './cars/cars-edit/cars-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import {HttpClientModule} from '@angular/common/http';
     WelcomeComponent,
     DashboardComponent,
     LoginComponent,
-    CarsListComponent
+    CarsListComponent,
+    CarsEditComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginComponent, httpInterceptorProviders, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.*;
@@ -27,7 +28,7 @@ public class VehicleController {
 
     @GetMapping
     @RolesAllowed("ADMIN")
-    public ResponseEntity all() {
+    public ResponseEntity<List<Vehicle>> all() {
         return ok(vehicleRepository.findAll());
     }
 

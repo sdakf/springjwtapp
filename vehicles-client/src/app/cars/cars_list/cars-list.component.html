@@ -1,17 +1,19 @@
 <mat-card>
-  <mat-card-title>vehicles-list!</mat-card-title>
+  <mat-card-title>SAMOCHODY</mat-card-title>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let vehicle of vehicles">
-        <img mat-list-avatar src="{{vehicle.giphyUrl}}" alt="{{vehicle.model}}">
+        <!--        <img mat-list-avatar src="{{vehicle.giphyUrl}}" alt="{{vehicle.model}}">-->
         <h3 mat-line>
-          <a mat-button [routerLink]="['/vehicle-edit',vehicle.id]">{{vehicle.model}}</a>
+          <a mat-button [routerLink]="['/car-edit',vehicle.id]">{{vehicle.model}}</a>
+          <a mat-button (click)="remove(vehicle.id)">
+            <mat-icon class="icon" fxFlex fxLayout fxLayoutAlign="flex-start">delete</mat-icon>
+          </a>
         </h3>
+
       </mat-list-item>
     </mat-list>
-
-
   </mat-card-content>
-  <button mat-fab color="primary" [routerLink]="['/vehicle-add']">Add</button>
+  <button mat-fab color="primary" [routerLink]="['/car-add']">Add</button>
 
 </mat-card>

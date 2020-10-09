@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    if (await this.authService.checkAuthenticated()) {
+    if (this.authService.checkAuthenticated()) {
       console.log(this.returnUrl);
       await this.router.navigate([this.returnUrl]);
     }

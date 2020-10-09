@@ -11,7 +11,9 @@ const TOKEN_HEADER_KEY = 'Authorization';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private tokenStorageService: TokenStorageService,private router: Router,private loginService: LoginComponent) {
+  constructor(private tokenStorageService: TokenStorageService,
+              private router: Router,
+              private loginService: LoginComponent) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {

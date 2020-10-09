@@ -19,8 +19,8 @@ export class AuthService {
   constructor(private router: Router, private tokenService: TokenStorageService, private httpClient: HttpClient) {
   }
 
-  async checkAuthenticated(): Promise<boolean> {
-    const authenticated = await this.tokenService.isLoggedIn();
+  checkAuthenticated(): boolean {
+    const authenticated = this.tokenService.isLoggedIn();
     this.isAuthenticated.next(authenticated);
     return authenticated;
   }

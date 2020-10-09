@@ -103,10 +103,12 @@
 
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-
+    <div fxFlex fxLayout fxLayoutAlign="flex-start">
+      APKA O SAMOCHODACH
+    </div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end">
-      <a mat-list-item  routerLink="/login"
-         *ngIf="!auth.isAuthenticated.value">
+      <a mat-list-item routerLink="/login"
+         *ngIf="!authenticated">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Login</span>
       </a>
@@ -115,9 +117,9 @@
         <mat-icon class="icon">home</mat-icon>
         <span class="label">Home</span>
       </a>
-      <a  mat-list-item
-          *ngIf="auth.isAuthenticated.value"
-          (click)="auth.logout('/')" type="button">
+      <a mat-list-item
+         *ngIf="authenticated"
+         (click)="auth.logout('/')" type="button">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">LogOut</span>
       </a>
@@ -127,16 +129,16 @@
 <mat-sidenav-container *ngIf="open">
   <mat-sidenav mode="side" opened>
     <mat-nav-list>
-            <a mat-list-item [routerLink]="'/cars'">
-              <mat-icon class="icon"> directions_car</mat-icon>
+      <a mat-list-item [routerLink]="'/cars'">
+        <mat-icon class="icon"> directions_car</mat-icon>
 
-              <span class="label">Samochody</span>
-            </a>
-            <a mat-list-item [routerLink]="'/users'">
-              <mat-icon class="icon"> face</mat-icon>
+        <span class="label">Samochody</span>
+      </a>
+      <a mat-list-item [routerLink]="'/users'">
+        <mat-icon class="icon"> face</mat-icon>
 
-              <span class="label">Użytkownicy</span>
-            </a>
+        <span class="label">Użytkownicy</span>
+      </a>
 
     </mat-nav-list>
 

@@ -39,4 +39,3 @@ export class CarsService {
     return this.http.delete(this.VEHICLES_API + id);
   }
 }
-}
