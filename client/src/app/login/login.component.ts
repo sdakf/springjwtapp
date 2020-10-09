@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
   private loginInfo: AuthLoginInfo;
 
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService,private router:Router) {
+  constructor(private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  logOut(){
+  logOut() {
     this.isLoggedIn = false;
     this.roles = []
     this.tokenStorage.signOut();

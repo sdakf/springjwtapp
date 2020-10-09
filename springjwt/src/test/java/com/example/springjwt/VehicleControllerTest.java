@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class VehicleControllerTest {
 
     @MockBean
-    VehicleRepository vehicles;
+    VehicleRepository vehiclesRepository;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -39,16 +39,16 @@ public class VehicleControllerTest {
 
     @Before
     public void setUp() {
-        given(this.vehicles.findById(1L))
+        given(this.vehiclesRepository.findById(1L))
                 .willReturn(Optional.of(Vehicle.builder().model("test").build()));
 
-        given(this.vehicles.findById(2L))
+        given(this.vehiclesRepository.findById(2L))
                 .willReturn(Optional.empty());
 
-        given(this.vehicles.save(any(Vehicle.class)))
+        given(this.vehiclesRepository.save(any(Vehicle.class)))
                 .willReturn(Vehicle.builder().model("test").build());
 
-        doNothing().when(this.vehicles).delete(any(Vehicle.class));
+        doNothing().when(this.vehiclesRepository).delete(any(Vehicle.class));
     }
 
     @Test
@@ -62,8 +62,8 @@ public class VehicleControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.model").value("test"));
 
-        verify(this.vehicles, times(1)).findById(any(Long.class));
-        verifyNoMoreInteractions(this.vehicles);
+        verify(this.vehiclesRepository, times(1)).findById(any(Long.class));
+        verifyNoMoreInteractions(this.vehiclesRepository);
     }
 
     @Test
@@ -76,8 +76,8 @@ public class VehicleControllerTest {
                 )
                 .andExpect(status().isNotFound());
 
-        verify(this.vehicles, times(1)).findById(any(Long.class));
-        verifyNoMoreInteractions(this.vehicles);
+        verify(this.vehiclesRepository, times(1)).findById(any(Long.class));
+        verifyNoMoreInteractions(this.vehiclesRepository);
     }
 
     @Test
@@ -91,8 +91,8 @@ public class VehicleControllerTest {
                 )
                 .andExpect(status().isCreated());
 
-        verify(this.vehicles, times(1)).save(any(Vehicle.class));
-        verifyNoMoreInteractions(this.vehicles);
+        verify(this.vehiclesRepository, times(1)).save(any(Vehicle.class));
+        verifyNoMoreInteractions(this.vehiclesRepository);
     }
 
     @Test
@@ -106,9 +106,9 @@ public class VehicleControllerTest {
                 )
                 .andExpect(status().isNoContent());
 
-        verify(this.vehicles, times(1)).findById(any(Long.class));
-        verify(this.vehicles, times(1)).save(any(Vehicle.class));
-        verifyNoMoreInteractions(this.vehicles);
+        verify(this.vehiclesRepository, times(1)).findById(any(Long.class));
+        verify(this.vehiclesRepository, times(1)).save(any(Vehicle.class));
+        verifyNoMoreInteractions(this.vehiclesRepository);
     }
 
     @Test
@@ -120,9 +120,9 @@ public class VehicleControllerTest {
                 )
                 .andExpect(status().isNoContent());
 
-        verify(this.vehicles, times(1)).findById(any(Long.class));
-        verify(this.vehicles, times(1)).delete(any(Vehicle.class));
-        verifyNoMoreInteractions(this.vehicles);
+        verify(this.vehiclesRepository, times(1)).findById(any(Long.class));
+        verify(this.vehiclesRepository, times(1)).delete(any(Vehicle.class));
+        verifyNoMoreInteractions(this.vehiclesRepository);
     }
 
 }

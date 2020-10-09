@@ -3,11 +3,13 @@ package com.example.springjwt;
 import com.example.springjwt.domain.User;
 import com.example.springjwt.domain.Vehicle;
 import com.google.common.collect.Lists;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
+@Profile("integrationTest")
 public class TestDataInit extends AppDataInitializer {
 
     @Override

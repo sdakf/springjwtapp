@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
-public abstract  class AbstractPersistableEntity<ID> implements Serializable {
+public abstract  class AbstractPersistableEntity<ID extends Serializable> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

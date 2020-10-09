@@ -105,7 +105,8 @@
   <mat-toolbar-row>
 
     <div fxFlex fxLayout fxLayoutAlign="flex-end">
-      <a mat-list-item  routerLink="/login">
+      <a mat-list-item  routerLink="/login"
+         *ngIf="!auth.isAuthenticated.value">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Login</span>
       </a>
@@ -114,8 +115,9 @@
         <mat-icon class="icon">home</mat-icon>
         <span class="label">Home</span>
       </a>
-      <a mat-list-item
-         type="button">
+      <a  mat-list-item
+          *ngIf="auth.isAuthenticated.value"
+          (click)="auth.logout('/')" type="button">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">LogOut</span>
       </a>

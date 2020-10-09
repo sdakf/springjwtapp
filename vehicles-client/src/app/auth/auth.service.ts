@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {TokenStorageService} from './token-storage.service';
 import {Constants} from '../constants';
 import {HttpClient} from '@angular/common/http';
 import {JwtResponse} from './jwt-response';
 import {AuthLoginInfo} from "./login-info";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -24,26 +25,28 @@ export class AuthService {
     return authenticated;
   }
 
-  async login(credentials: AuthLoginInfo): Promise<void> {
-    this.httpClient.post<JwtResponse>(this.loginUrl, credentials).subscribe(e => {
-        if (e.token === null) {
+  login(credentials: AuthLoginInfo): Observable<boolean> {
+    return this.httpClient.post<JwtResponse>(this.loginUrl, credentials)
+      .pipe(map(jwtResponse => {
+        if (jwtResponse.token === null) {
           console.log('cant login');
         }
-        console.log(e);
+        console.log('logged');
         this.isAuthenticated.next(true);
-
-        this.tokenService.saveToken(e.token);
-      },
-      error => {
-        console.log(error);
-        this.tokenService.signOut();
-        this.isAuthenticated.next(false);
-      });
+        this.tokenService.saveToken(jwtResponse.token);
+        return this.isAuthenticated.value;
+      }));
+    // ,
+    // error => {
+    //   console.log(error);
+    //   this.tokenService.signOut();
+    //   this.isAuthenticated.next(false);
+    // });
   }
 
-  async logout(redirect: string) {
+  logout(redirect: string): void {
     try {
-      await this.authClient.signOut();
+      this.tokenService.signOut();
       this.isAuthenticated.next(false);
       this.router.navigate([redirect]);
     } catch (err) {

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from "../auth/auth.service";
-import {AuthLoginInfo} from "../auth/login-info";
+import {AuthService} from '../auth/auth.service';
+import {AuthLoginInfo} from '../auth/login-info';
 
 // import { AuthService } from '../auth.service';
 
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     });
 
     if (await this.authService.checkAuthenticated()) {
+      console.log(this.returnUrl);
       await this.router.navigate([this.returnUrl]);
     }
   }
@@ -44,12 +45,17 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       const username = this.form.get('username').value;
       const password = this.form.get('password').value;
-      this.authService.login(new AuthLoginInfo(username, password)).then(e => {
-        // .then(e => {
-        this.loginInvalid = !this.authService.isAuthenticated.value;
-      });
+      this.authService.login(new AuthLoginInfo(username, password))
+      .subscribe(e => {
+      if (this.authService.isAuthenticated.value) {
+        console.log(this.returnUrl);
+        this.router.navigate([this.returnUrl]);
+
+      } else {
+        console.log('not logged');
+      }
       // console.log(e)
-      // });
+      });
     } else {
       this.formSubmitAttempt = true;
     }

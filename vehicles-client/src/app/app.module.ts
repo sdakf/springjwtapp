@@ -10,7 +10,7 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { CarsComponent } from './cars/cars.component';
+import { CarsListComponent } from './cars/cars_list/cars-list.component';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -19,7 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
     WelcomeComponent,
     DashboardComponent,
     LoginComponent,
-    CarsComponent
+    CarsListComponent
   ],
   imports: [
     BrowserModule,
