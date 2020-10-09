@@ -32,7 +32,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @PostMapping("/signIn")
-    public ResponseEntity signIn(@RequestBody AuthenticationRequest data) {
+    public ResponseEntity<JwtResponse> signIn(@RequestBody AuthenticationRequest data) {
 
         try {
             String username = data.getUsername();
@@ -43,18 +43,4 @@ public class AuthController {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
     }
-
-    @PostMapping("/signUn")
-    public ResponseEntity signUn(@RequestBody AuthenticationRequest data) {
-
-        try {
-            String username = data.getUsername();
-            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            String token = jwtTokenProvider.createToken(username, userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username " + username + "not found")).getRoles());
-            return ok(new JwtResponse(token, data.getUsername(), authenticate.getAuthorities()));
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username/password supplied");
-        }
-    }
-
 }
